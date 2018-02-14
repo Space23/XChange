@@ -16,7 +16,7 @@ import org.knowm.xchange.utils.DateUtils;
  * A ticker contains data representing the latest trade.
  * </p>
  */
-public final class Ticker implements Serializable {
+public class Ticker implements Serializable {
 
   private final CurrencyPair currencyPair;
   private final BigDecimal open;
@@ -33,7 +33,12 @@ public final class Ticker implements Serializable {
    */
   private final Date timestamp;
 
-  /**
+  
+  public Ticker() {
+	super();
+}
+
+/**
    * Constructor
    *
    * @param currencyPair The tradable identifier (e.g. BTC in BTC/USD)

@@ -40,6 +40,16 @@
             <artifactId>commons-lang3</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+	        <version>${spring.boot.release}</version>
+	    </dependency>
 
     </dependencies>
+    
+    <properties>
+    	<spring.boot.release>1.5.9.RELEASE</spring.boot.release>
+    </properties>
 </project>
