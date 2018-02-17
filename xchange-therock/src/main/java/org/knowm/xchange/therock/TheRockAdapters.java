@@ -70,7 +70,7 @@ public final class TheRockAdapters {
         .timestamp(timestamp).build();
   }
 
-  public static Trades adaptTrades(TheRockTrades trades, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static Trades adaptTrades(TheRockTrades trades, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
 
     List<Trade> tradesList = new ArrayList<>(trades.getCount());
     long lastTradeId = 0;
@@ -87,20 +87,20 @@ public final class TheRockAdapters {
     return new Trades(tradesList, lastTradeId, Trades.TradeSortType.SortByID);
   }
 
-  public static Trade adaptTrade(TheRockTrade trade, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static Trade adaptTrade(TheRockTrade trade, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
     final String tradeId = String.valueOf(trade.getId());
     return new Trade(trade.getSide() == Side.sell ? OrderType.ASK : BID, trade.getAmount(), currencyPair, trade.getPrice(), trade.getDate(), tradeId);
   }
 
-  public static UserTrade adaptUserTrade(TheRockUserTrade trade, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static UserTrade adaptUserTrade(TheRockUserTrade trade, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
     final String tradeId = String.valueOf(trade.getId());
     //return new UserTrade(trade.getSide() == Side.sell ? OrderType.ASK : BID, trade.getAmount(), currencyPair, trade.getPrice(), trade.getDate(), tradeId);
     return new UserTrade.Builder().id(tradeId).originalAmount(trade.getAmount()).currencyPair(currencyPair).price(trade.getPrice())
         .timestamp(trade.getDate()).orderId(String.valueOf(trade.getOrderId())).type(trade.getSide() == Side.buy ? OrderType.BID : OrderType.ASK)
-        .feeAmount(trade.getFeeAmount()).feeCurrency(trade.getFeeCurrency() == null ? null : new Currency(trade.getFeeCurrency())).build();
+        .feeAmount(trade.getFeeAmount()).feeCurrency(trade.getFeeCurrency() == null ? null : Currency.getInstance(trade.getFeeCurrency())).build();
   }
 
-  public static UserTrades adaptUserTrades(TheRockUserTrades trades, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static UserTrades adaptUserTrades(TheRockUserTrades trades, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
 
     List<UserTrade> tradesList = new ArrayList<>(trades.getCount());
     long lastTradeId = 0;

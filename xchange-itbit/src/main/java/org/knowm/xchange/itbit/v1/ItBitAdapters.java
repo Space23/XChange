@@ -96,7 +96,7 @@ public final class ItBitAdapters {
     return parse;
   }
 
-  public static Trades adaptTrades(ItBitTrades trades, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static Trades adaptTrades(ItBitTrades trades, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
 
     List<Trade> tradesList = new ArrayList<>(trades.getCount());
     long lastTradeId = 0;
@@ -110,7 +110,7 @@ public final class ItBitAdapters {
     return new Trades(tradesList, lastTradeId, TradeSortType.SortByID);
   }
 
-  public static Trade adaptTrade(ItBitTrade trade, CurrencyPair currencyPair) throws InvalidFormatException {
+  public static Trade adaptTrade(ItBitTrade trade, CurrencyPair currencyPair) throws com.fasterxml.jackson.databind.exc.InvalidFormatException {
     String timestamp = trade.getTimestamp();
 
     //matcher instantiated each time for adaptTrade to be thread-safe
@@ -207,7 +207,7 @@ public final class ItBitAdapters {
       CurrencyPair currencyPair = new CurrencyPair(instrument.substring(0, 3), instrument.substring(3, 6));
 
       trades.add(new UserTrade(orderType, itBitTrade.getCurrency1Amount(), currencyPair, itBitTrade.getRate(), itBitTrade.getTimestamp(), null,
-          itBitTrade.getOrderId(), itBitTrade.getCommissionPaid(), new Currency(itBitTrade.getCommissionCurrency())));
+          itBitTrade.getOrderId(), itBitTrade.getCommissionPaid(), Currency.getInstance(itBitTrade.getCommissionCurrency())));
     }
 
     return new UserTrades(trades, TradeSortType.SortByTimestamp);
