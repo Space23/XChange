@@ -2,6 +2,8 @@ package org.knowm.xchange.currency;
 
 import java.io.Serializable;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * </p>
  */
 @JsonSerialize(using = CustomCurrencyPairSerializer.class)
+@Document
 public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
   // Provide some standard major symbols
