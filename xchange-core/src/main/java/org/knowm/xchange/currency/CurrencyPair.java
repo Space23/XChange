@@ -2,6 +2,7 @@ package org.knowm.xchange.currency;
 
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -259,11 +260,18 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
   public static final CurrencyPair ETH_UAH = new CurrencyPair(Currency.ETH, Currency.UAH);
   public static final CurrencyPair BCH_UAH = new CurrencyPair(Currency.BCH, Currency.UAH);
 
+  @Id
+  public String id;
+  
+  public Currency base;
+  public Currency counter;
 
-  public final Currency base;
-  public final Currency counter;
+  
+  public CurrencyPair() {
+		super();
+	}
 
-  /**
+/**
    * <p>
    * Full constructor
    * </p>
@@ -277,6 +285,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
     this.base = base;
     this.counter = counter;
+    this.id = toString();
   }
 
   /**
@@ -308,6 +317,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
     this.base = Currency.getInstance(base);
     this.counter = Currency.getInstance(counter);
+    this.id = toString();
   }
 
   @Override
