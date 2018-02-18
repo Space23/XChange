@@ -34,9 +34,9 @@ public class Ticker implements Serializable {
   private final Date timestamp;
 
   
-  public Ticker() {
+  /*public Ticker() {
 	super();
-}
+}*/
 
 /**
    * Constructor

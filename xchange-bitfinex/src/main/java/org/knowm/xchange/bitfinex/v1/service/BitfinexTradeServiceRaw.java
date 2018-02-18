@@ -24,7 +24,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
 
   /**
    * Constructor
-   *
+   * 
    * @param exchange
    */
   public BitfinexTradeServiceRaw(Exchange exchange) {
@@ -52,6 +52,17 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
     }
   }
 
+  public BitfinexOrderStatusResponse[] getBitfinexOrdersHistory(long limit) throws IOException {
+
+	  try {
+		BitfinexOrderStatusResponse[] orders = bitfinex.ordersHist(apiKey, payloadCreator, signatureCreator,
+				  new BitfinexOrdersHistoryRequest(String.valueOf(exchange.getNonceFactory().createValue()), limit));
+		  return orders;
+	  } catch (BitfinexException e) {
+		  throw new ExchangeException(e);
+	  }
+  }
+
   public BitfinexOfferStatusResponse[] getBitfinexOpenOffers() throws IOException {
 
     try {
@@ -66,7 +77,7 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
   public BitfinexOrderStatusResponse placeBitfinexMarketOrder(MarketOrder marketOrder, BitfinexOrderType bitfinexOrderType) throws IOException {
 
     String pair = BitfinexUtils.toPairString(marketOrder.getCurrencyPair());
-    String type = marketOrder.getType().equals(OrderType.BID) ? "buy" : "sell";
+    String type = (marketOrder.getType().equals(OrderType.BID) || marketOrder.getType().equals(OrderType.EXIT_ASK)) ? "buy" : "sell";
     String orderType = bitfinexOrderType.toString();
 
     try {
@@ -154,13 +165,13 @@ public class BitfinexTradeServiceRaw extends BitfinexBaseService {
       if (o instanceof LimitOrder) {
         LimitOrder limitOrder = (LimitOrder) o;
         String pair = BitfinexUtils.toPairString(limitOrder.getCurrencyPair());
-        String type = limitOrder.getType().equals(OrderType.BID) ? "buy" : "sell";
+        String type = (limitOrder.getType().equals(OrderType.BID) || limitOrder.getType().equals(OrderType.EXIT_ASK)) ? "buy" : "sell";
         String orderType = bitfinexOrderType.toString();
         bitfinexOrders[i] = new BitfinexNewOrder(pair, "bitfinex", type, orderType, limitOrder.getOriginalAmount(), limitOrder.getLimitPrice());
       } else if (o instanceof MarketOrder) {
         MarketOrder marketOrder = (MarketOrder) o;
         String pair = BitfinexUtils.toPairString(marketOrder.getCurrencyPair());
-        String type = marketOrder.getType().equals(OrderType.BID) ? "buy" : "sell";
+        String type = (marketOrder.getType().equals(OrderType.BID) || marketOrder.getType().equals(OrderType.EXIT_ASK)) ? "buy" : "sell";
         String orderType = bitfinexOrderType.toString();
         bitfinexOrders[i] = new BitfinexNewOrder(pair, "bitfinex", type, orderType, marketOrder.getOriginalAmount(), BigDecimal.ONE);
       }
