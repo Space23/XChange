@@ -27,7 +27,7 @@ public class CurrencyPairMetaData implements Serializable {
 
   @JsonProperty("price_scale")
   private final Integer priceScale;
-
+  
   /**
    * Constructor
    *
@@ -65,7 +65,7 @@ public class CurrencyPairMetaData implements Serializable {
     return priceScale;
   }
 
-  @Override
+@Override
   public String toString() {
 
     return "CurrencyPairMetaData [tradingFee=" + tradingFee + ", minimumAmount=" + minimumAmount + ", maximumAmount=" + maximumAmount
