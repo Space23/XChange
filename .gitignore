@@ -10,7 +10,6 @@
 .settings/
 .metadata/
 .classpath
-.project
 
 #NetBeans
 nb-configuration.xml
