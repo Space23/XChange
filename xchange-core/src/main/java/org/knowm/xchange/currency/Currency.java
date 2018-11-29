@@ -9,11 +9,15 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * A Currency class roughly modeled after {@link java.util.Currency}. Each object retains the code
  * it was acquired with -- so {@link #getInstance}("BTC").{@link #getCurrencyCode}() will always be
  * "BTC", even though the proposed ISO 4217 code is "XBT"
  */
+@Document
 public class Currency implements Comparable<Currency>, Serializable {
 
   private static final Map<String, Currency> currencies = new HashMap<>();
@@ -295,9 +299,14 @@ public class Currency implements Comparable<Currency>, Serializable {
   public static final Currency ELF = createCurrency("ELF", "aelf", null);
   public static final Currency STORJ = createCurrency("STORJ", "Storj", null);
   public static final Currency MOD = createCurrency("MOD", "Modum", null);
-  private final String code;
-  private final CurrencyAttributes attributes;
+  @Id
+  private String code;
+  private CurrencyAttributes attributes;
 
+  public Currency() {
+		super();
+	}
+  
   /** Public constructor. Links to an existing currency. */
   public Currency(String code) {
 
@@ -481,12 +490,16 @@ public class Currency implements Comparable<Currency>, Serializable {
 
   private static class CurrencyAttributes implements Serializable {
 
-    public final Set<String> codes;
-    public final String isoCode;
-    public final String commonCode;
-    public final String name;
-    public final String unicode;
+    public Set<String> codes;
+    public String isoCode;
+    public String commonCode;
+    public String name;
+    public String unicode;
 
+    public CurrencyAttributes() {
+		super();
+	}
+    
     public CurrencyAttributes(
         String commonCode, String name, String unicode, String... alternativeCodes) {
 
