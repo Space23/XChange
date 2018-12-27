@@ -39,7 +39,23 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
+		
+		<dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+        	<artifactId>jackson-mapper-asl</artifactId>
+        	<version>1.9.13</version>
+        </dependency>
+        
+        <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+	        <version>${spring.boot.release}</version>
+	    </dependency>
 
 
 	</dependencies>
+	
+	<properties>
+    	<spring.boot.release>1.5.9.RELEASE</spring.boot.release>
+    </properties>
 </project>

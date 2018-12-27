@@ -411,6 +411,34 @@
 
 	<build>
 
+	<pluginManagement>
+	  <plugins>
+		<plugin>
+		 <groupId>org.eclipse.m2e</groupId>
+		 <artifactId>lifecycle-mapping</artifactId>
+		 <version>1.0.0</version>
+		 <configuration>
+		   <lifecycleMappingMetadata>
+			 <pluginExecutions>
+			   <pluginExecution>
+				 <pluginExecutionFilter>
+				   <groupId>com.coveo</groupId>
+					<artifactId>fmt-maven-plugin</artifactId>
+				    <versionRange>[2.5.0,)</versionRange>
+				    <goals>
+					 <goal>format</goal>
+				    </goals>
+				 </pluginExecutionFilter>
+				 <action>
+				   <ignore/>
+				 </action>
+			   </pluginExecution>
+			 </pluginExecutions>
+		   </lifecycleMappingMetadata>
+		 </configuration>
+		</plugin>
+	  </plugins>
+	</pluginManagement>
 		<plugins>
 			<!-- Ensure compilation is done under Java 8 in all environments -->
 			<plugin>

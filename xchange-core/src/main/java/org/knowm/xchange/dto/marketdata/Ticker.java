@@ -26,12 +26,17 @@ public final class Ticker implements Serializable {
   private final BigDecimal volume;
   private final BigDecimal quoteVolume;
   /** the timestamp of the ticker according to the exchange's server, null if not provided */
-  private final Date timestamp;
+  private Date timestamp;
 
   private final BigDecimal bidSize;
   private final BigDecimal askSize;
 
-  /**
+  
+  public void setTimestamp(Date timestamp) {
+	this.timestamp = timestamp;
+}
+
+/**
    * Constructor
    *
    * @param currencyPair The tradable identifier (e.g. BTC in BTC/USD)
