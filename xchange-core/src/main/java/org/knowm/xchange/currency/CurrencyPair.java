@@ -3,6 +3,9 @@ package org.knowm.xchange.currency;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Value object to provide the following to API:
  *
@@ -15,6 +18,7 @@ import java.io.Serializable;
  * 1.25 USD
  */
 @JsonSerialize(using = CustomCurrencyPairSerializer.class)
+@Document
 public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
   // Provide some standard major symbols
@@ -333,9 +337,15 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
   public static final CurrencyPair ETC_7D =
       new CurrencyPair(Currency.ETC, Currency.getInstance("7D"));
 
-  public final Currency base;
-  public final Currency counter;
+  public Currency base;
+  public Currency counter;
+  
+  @Id
+  public String id;
 
+  public CurrencyPair() {
+		super();
+	}
   /**
    * Full constructor In general the CurrencyPair.base is what you're wanting to buy/sell. The
    * CurrencyPair.counter is what currency you want to use to pay/receive for your purchase/sale.
@@ -348,6 +358,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
     this.base = base;
     this.counter = counter;
+    this.id = toString();
   }
 
   /**
@@ -378,6 +389,7 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
     this.base = Currency.getInstance(base);
     this.counter = Currency.getInstance(counter);
+    this.id = toString();
   }
 
   @Override
