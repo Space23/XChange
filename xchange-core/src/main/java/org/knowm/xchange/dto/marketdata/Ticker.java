@@ -31,12 +31,11 @@ public final class Ticker implements Serializable {
   private final BigDecimal bidSize;
   private final BigDecimal askSize;
 
-  
   public void setTimestamp(Date timestamp) {
-	this.timestamp = timestamp;
-}
+    this.timestamp = timestamp;
+  }
 
-/**
+  /**
    * Constructor
    *
    * @param currencyPair The tradable identifier (e.g. BTC in BTC/USD)

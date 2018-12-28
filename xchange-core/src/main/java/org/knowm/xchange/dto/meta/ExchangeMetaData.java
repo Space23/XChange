@@ -79,18 +79,19 @@ public class ExchangeMetaData implements Serializable {
     }
     return result;
   }
-  
+
   public void addRateLimit(RateLimit rateLimit) {
-	  RateLimit[] newPrivateRateLimit = null;
-	  if (this.privateRateLimits != null) {
-		  newPrivateRateLimit = new RateLimit[this.privateRateLimits.length + 1];
-		  System.arraycopy(this.privateRateLimits, 0, newPrivateRateLimit, 0, this.privateRateLimits.length);
-	  } else {
-		  newPrivateRateLimit = new RateLimit[1];
-	  }
-	  
-	  newPrivateRateLimit[newPrivateRateLimit.length - 1] = rateLimit;
-	  this.privateRateLimits = newPrivateRateLimit;
+    RateLimit[] newPrivateRateLimit = null;
+    if (this.privateRateLimits != null) {
+      newPrivateRateLimit = new RateLimit[this.privateRateLimits.length + 1];
+      System.arraycopy(
+          this.privateRateLimits, 0, newPrivateRateLimit, 0, this.privateRateLimits.length);
+    } else {
+      newPrivateRateLimit = new RateLimit[1];
+    }
+
+    newPrivateRateLimit[newPrivateRateLimit.length - 1] = rateLimit;
+    this.privateRateLimits = newPrivateRateLimit;
   }
 
   public Map<CurrencyPair, CurrencyPairMetaData> getCurrencyPairs() {

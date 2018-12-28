@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /** Describe a call rate limit as a number of calls per some time span. */
@@ -49,17 +48,17 @@ public class RateLimit implements Serializable {
     this.timeSpan = timeSpan;
     this.reachedRateLimit = false;
   }
-  
+
   public RateLimit(int calls, int timeSpan, TimeUnit timeUnit, boolean reachedRateLimit) {
-		this.calls = calls;
-		this.timeSpan = timeSpan;
-		this.timeUnit = timeUnit;
-		this.reachedRateLimit = reachedRateLimit;
-	}
-  
+    this.calls = calls;
+    this.timeSpan = timeSpan;
+    this.timeUnit = timeUnit;
+    this.reachedRateLimit = reachedRateLimit;
+  }
+
   public boolean isReachedRateLimit() {
-		return reachedRateLimit;
-	}
+    return reachedRateLimit;
+  }
 
   /**
    * @return this rate limit as a number of milliseconds required between any two remote calls,

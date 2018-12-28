@@ -2,7 +2,6 @@ package org.knowm.xchange.currency;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -339,13 +338,12 @@ public class CurrencyPair implements Comparable<CurrencyPair>, Serializable {
 
   public Currency base;
   public Currency counter;
-  
-  @Id
-  public String id;
+
+  @Id public String id;
 
   public CurrencyPair() {
-		super();
-	}
+    super();
+  }
   /**
    * Full constructor In general the CurrencyPair.base is what you're wanting to buy/sell. The
    * CurrencyPair.counter is what currency you want to use to pay/receive for your purchase/sale.

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -299,14 +298,13 @@ public class Currency implements Comparable<Currency>, Serializable {
   public static final Currency ELF = createCurrency("ELF", "aelf", null);
   public static final Currency STORJ = createCurrency("STORJ", "Storj", null);
   public static final Currency MOD = createCurrency("MOD", "Modum", null);
-  @Id
-  private String code;
+  @Id private String code;
   private CurrencyAttributes attributes;
 
   public Currency() {
-		super();
-	}
-  
+    super();
+  }
+
   /** Public constructor. Links to an existing currency. */
   public Currency(String code) {
 
@@ -497,9 +495,9 @@ public class Currency implements Comparable<Currency>, Serializable {
     public String unicode;
 
     public CurrencyAttributes() {
-		super();
-	}
-    
+      super();
+    }
+
     public CurrencyAttributes(
         String commonCode, String name, String unicode, String... alternativeCodes) {
 
