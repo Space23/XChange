@@ -1,9 +1,12 @@
 package org.knowm.xchange.dto.meta;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Optional;
 
 public class CurrencyPairMetaData implements Serializable {
 
@@ -25,8 +28,27 @@ public class CurrencyPairMetaData implements Serializable {
 
   @JsonProperty("price_scale")
   private final Integer priceScale;
+  
+  private long refreshRate=0;
+  private Date lastUpdate = null;
+  
+  @JsonIgnore
+  public Optional<Date> getLastUpdate() {
+	return Optional.ofNullable(lastUpdate);
+ }
+ public void setLastUpdate(Date lastUpdate) {
+	this.lastUpdate = lastUpdate;
+ }
 
-  /**
+public long getRefreshRate() {
+	return refreshRate;
+  }
+
+  public void setRefreshRate(long refreshRate) {
+	this.refreshRate = refreshRate;
+  }
+
+/**
    * Constructor
    *
    * @param tradingFee Trading fee (fraction)
